@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  database:
+    image: mariadb:11.1.2-rc
+    container_name: WebDevWonder-bdd
+    restart: always
+    ports:
+      - "5554:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_DATABASE: WebDevWonder
+    volumes:
+      - ./data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: WebDevWonder-phpmyadmin
+    restart: always
+    ports:
+      - "5005:80"
+    depends_on:
+      - database
+    environment:
+      PMA_HOST: database
+      PMA_USER: root
+      PMA_PASSWORD: root
+      PHP_INI_UPLOAD_MAX_FILESIZE: 100M
+      PHP_INI_POST_MAX_SIZE: 100M

@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div class="row" style="max-width: 100vw">
+		{% for message in app.flashes('error') %}
+		<div class="alert alert-danger mt-3" role="alert">
+			{{ message }}
+		</div>
+		{% endfor %}
+		{% for post in posts %}
+			<div class="col-lg-3 mt-5 m-auto">
+				<div class="card mb-4 mx-4" style="max-width: max-content">
+					{% if post.image  %}
+						<img src={{ asset('uploads/' ~ post.image) }} class="card-img-top" alt={{post.title}}>
+					{% endif %}
+					<div class="card-body">
+						<h5 class="card-title">{{ post.title }}</h5>
+						<p class="card-text">{{ post.content }}</p>
+						{% if app.user %}
+							<div class="d-flex justify-content-around">
+								<a href="{{ path('delete', {'id': post.id}) }}" class="btn btn-danger" style="width: 150px">Supprimer</a>
+								<a href="{{ path('edit', {'id': post.id}) }}" class="btn btn-warning" style="width: 150px">Modifier</a>
+							</div>
+						{% endif %}
+						<div class="footer mt-2 p-2 d-flex justify-content-center">
+							<small class="text-muted">Publié par
+								{{post.user.username}}
+								le
+								{{post.publishedAt | date("d/m/Y")}}
+								à
+								{{post.publishedAt | date("H:i")}}
+							</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock body %}
+
+		
+		
+		
+
+		
+
+		

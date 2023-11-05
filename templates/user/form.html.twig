@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+	{{ form_start(user_form,{'attr': {'class': 'container d-flex flex-column flex-wrap w-25 h-100 justify-content-center mt-5'}}) }}
+	{{ form_row(user_form.username) }}
+	{{ form_row(user_form.email) }}
+	{{ form_label(user_form.password) }}
+	<div class="input-group mb-4">
+		{{ form_widget(user_form.password) }}
+		<span class="input-group-text" role="button" onclick="togglePassword()">
+			<i class="bi bi-eye-slash eyeslash"></i>
+			<i class="bi bi-eye eye d-none"></i>
+		</span>
+	</div>
+	{{ form_errors(user_form.password) }}
+	{{ form_row(user_form.confirm_password) }}
+	<div class="d-flex justify-content-around">
+		<input type="submit" value="Enregistrer" class="btn btn-primary">
+		<a role="button" href="{{ path('app_post') }}" class="btn btn-danger">Annuler</a>
+	</div>
+	{{ form_end(user_form) }}
+{% endblock %}
