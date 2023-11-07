@@ -13,7 +13,7 @@ class Post
     #[ORM\Column(type: "integer")]
     private int $id;
 
-    #[ORM\Column(type: "string", nullable: true, length: 150)]
+    #[ORM\Column(type: "string", length: 150, nullable: true)]
     private ?string $title = NULL;
 
     #[ORM\Column(type: "text", length: 320)]

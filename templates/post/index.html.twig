@@ -19,7 +19,7 @@
 						{% if app.user %}
 							<div class="d-flex justify-content-around">
 								<a href="{{ path('delete', {'id': post.id}) }}" class="btn btn-danger" style="width: 150px">Supprimer</a>
-								<a href="{{ path('edit', {'id': post.id}) }}" class="btn btn-warning" style="width: 150px">Modifier</a>
+								<a href="{{ path('app_post_edit', {'id': post.id}) }}" class="btn btn-warning" style="width: 150px">Modifier</a>
 							</div>
 						{% endif %}
 						<div class="footer mt-2 p-2 d-flex justify-content-center">

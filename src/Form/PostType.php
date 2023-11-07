@@ -22,25 +22,20 @@ class PostType extends AbstractType
             ->add("title", TextType::class, [
                 "label" => "Titre",
                 "required" => false,
-                "constraints" => [new Length(["min" => 0, "max" => 150, "minMessage" => "Le titre ne doit pas faire plus de 150 caractères", "maxMessage" => "Le titre ne doit pas faire plus de 150 caractères"]),]
+                "constraints" => [new Length([
+                  "min" => 0, "minMessage" => "Le titre ne doit pas faire plus de 150 caractères",
+                  "max" => 150, "maxMessage" => "Le titre ne doit pas faire plus de 150 caractères"]),]
             ])
             ->add("content", TextareaType::class, [
                 "label" => "Contenu",
                 "required" => true,
                 "constraints" => [
-                    new Length(["min" => 5, "max" => 320, "minMessage" => "Le contenu doit faire entre 5 et 320 caractères", "maxMessage" => "Le contenu doit faire entre 5 et 320 caractères"]),
+                    new Length([
+                      "min" => 5, "minMessage" => "Le contenu doit faire entre 5 et 320 caractères",
+                      "max" => 320,  "maxMessage" => "Le contenu doit faire entre 5 et 320 caractères"]),
                     new NotBlank(["message" => 'Le contenu ne doit pas être vide !'])
                 ]
             ])
-            /* ->add("image", UrlType::class, [
-                "label" => "URL de l'image",
-                "required" => false,
-                'constraints' => [
-                    new Url(
-                        ['message' => "L'image doit être une URL valide"]
-                    )
-                ],
-            ]); */
             ->add("image", FileType::class, [
                 "label" => "L'image",
                 'mapped' => false,

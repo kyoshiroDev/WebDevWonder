@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Form\PostTypeEdit;
 use App\Repository\PostRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,7 +30,7 @@ class PostController extends AbstractController
     ]);
   }
 
-  #[Route('/post/new', name: "new")]
+  #[Route('/post/new', name: "app_post_new")]
   public function create(Request $request, ManagerRegistry $doctrine, SluggerInterface $slugger): Response
   {
     $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -66,24 +67,26 @@ class PostController extends AbstractController
     ]);
   }
 
-  #[Route('/post/edit/{id}', name: "edit")]
+  #[Route('/post/edit/{id}', name: "app_post_edit")]
+
   public function update(Request $request, Post $post, ManagerRegistry $doctrine): Response
   {
+
     $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
     if ($this->getUser() !== $post->getUser()) {
       $this->addFlash("error", "Vous ne pouvez pas modifier une publication qui ne vous appartient pas.");
       return $this->redirectToRoute("app_post");
       // throw new AccessDeniedException("Vous n'avez pas accès à cette fonctionnalité.");
     }
-    $form = $this->createForm(PostType::class, $post);
+    $form = $this->createForm(PostTypeEdit::class, $post);
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
       $em = $doctrine->getManager();
       $em->flush();
       return $this->redirectToRoute("app_post");
     }
-    return $this->render('post/form.html.twig', [
-      "post_form" => $form->createView()
+    return $this->render('post/form-edit.html.twig', [
+      "post_form" => $form->createView(),
     ]);
   }
 
