@@ -2,10 +2,10 @@
 
 {% block body %}
 	<div class="container w-50 mt-5">
-		{{ form_start(post_form) }}
-		{{ form_row(post_form.title) }}
-		{{ form_row(post_form.content) }}
-		{{ form_row(post_form.image) }}
+		{{ form_start(post_form,{'attr': {'class': 'card border-dark p-3'}}) }}
+		{{ form_row(post_form.title,{'attr': {'class': 'border-dark'}}) }}
+		{{ form_row(post_form.content,{'attr': {'class': 'border-dark'}}) }}
+		{{ form_row(post_form.image,{'attr': {'class': 'border-dark'}}) }}
 		<div class="container d-flex justify-content-center">
 			<input type="submit" value="Publier" class="btn btn-primary w-50">
 		</div>

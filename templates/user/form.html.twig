@@ -2,7 +2,7 @@
 
 {% block body %}
 
-	{{ form_start(user_form,{'attr': {'class': 'container d-flex flex-column flex-wrap w-25 h-100 justify-content-center mt-5'}}) }}
+	{{ form_start(user_form,{'attr': {'class': 'container d-flex flex-column flex-wrap w-25 h-100 justify-content-center mt-5 border-dark'}}) }}
 	{{ form_row(user_form.username) }}
 	{{ form_row(user_form.email) }}
 	{{ form_label(user_form.password) }}
